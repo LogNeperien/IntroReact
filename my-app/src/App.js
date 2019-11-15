@@ -11,6 +11,12 @@ class App extends React.Component {
     ]
   }
 
+  handleClick =() => {
+    const clients = this.state.clients.slice();
+    clients.push({id : 4, nom : "Eloi"})
+    this.setState({clients : clients})
+  }
+
   render() {
 
       return(
@@ -24,7 +30,7 @@ class App extends React.Component {
             </li>))}
         </ul>
         <input type="text" placeholder="Ajouter un client"></input>
-        <button>Confirmer</button>
+        <button onClick={this.handleClick}>Confirmer</button>
         </div>
       )
 
