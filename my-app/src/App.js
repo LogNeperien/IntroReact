@@ -12,13 +12,16 @@ class App extends React.Component {
   }
 
   render() {
+
       return(
         <div>
         <h1>Liste de client</h1>
         <ul>
-          <li>Bob <button>X</button></li>
-          <li>Martine <button>X</button></li>
-          <li>Jeanne <button>X</button></li>
+          {this.state.clients.map(
+            client => (
+            <li>
+             {client.nom} <button>X</button>
+            </li>))}
         </ul>
         <input type="text" placeholder="Ajouter un client"></input>
         <button>Confirmer</button>
