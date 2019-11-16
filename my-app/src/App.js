@@ -3,6 +3,9 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends React.Component {
+	
+	clientInput = React.createRef();
+	
   state = {
     clients : [
       {id : 1, nom : "Bob"},
@@ -23,21 +26,28 @@ class App extends React.Component {
 	clients.splice(index,1);
     this.setState({clients : clients})
   }
+  
+  handleSubmit = (event) => {
+	  event.preventDefault(); //pour pas que la page se recharge
+	  console.log(this.clientInput.current.value);
+  }
 
   render() {
 
       return(
         <div>
-        <h1>Liste de client</h1>
-        <ul>
-          {this.state.clients.map(
-            client => (
-            <li>
-             {client.nom} <button onClick={() => this.handleClick2(client.id)}>X</button>
-            </li>))}
-        </ul>
-        <input type="text" placeholder="Ajouter un client"></input>
-        <button onClick={() => this.handleClick()}>Confirmer</button>
+			<h1>Liste de client</h1>
+			<ul>
+			  {this.state.clients.map(
+				client => (
+				<li>
+				 {client.nom} <button onClick={() => this.handleClick2(client.id)}>X</button>
+				</li>))}
+			</ul>
+			<form onSubmit= {this.handleSubmit}>
+				<input ref={this.clientInput} type="text" placeholder="Ajouter un client"></input>
+				<button /*onClick={() => this.handleClick()}*/>Confirmer</button>
+			</form>
         </div>
       )
 
