@@ -2,6 +2,7 @@ import React from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Client from './Client.js'; 
+import ClientForm from './ClientForm.js'; 
 
 class App extends React.Component {
 	
@@ -12,8 +13,7 @@ class App extends React.Component {
       {id : 1, nom : "Bob"},
       {id : 2, nom : "Martine"},
       {id : 3, nom : "Jeanne"}
-    ],
-	nouveauClient: ''
+    ]
   }
 
   handleClick2 = id => {
@@ -24,20 +24,11 @@ class App extends React.Component {
     this.setState({clients})
   }
   
-  handleSubmit = (event) => {
-	  event.preventDefault()
-	  
-	  const id = new Date().getTime();
-	  const nom = this.state.nouveauClient;
-	  
-	  //const clients = this.state.clients.slice(); //c'est la meme chose
+  handleAdd = client => {
 	  const clients = [...this.state.clients];
-      clients.push({id, nom});
-      this.setState({clients, nouveauClient : ''});
-  }
-  
-  handleChange = (event) => {
-	  this.setState({nouveauClient : event.currentTarget.value});
+      clients.push(client);
+	  console.log(client.nom);
+      this.setState({clients});
   }
 
   render() {
@@ -50,10 +41,7 @@ class App extends React.Component {
 				client => (<Client details={client} onDelete={this.handleClick2} />)
 			  )}
 			</ul>
-			<form onSubmit= {this.handleSubmit}>
-				<input value={this.state.nouveauClient} onChange={this.handleChange} type="text" placeholder="Ajouter un client"></input>
-				<button>Confirmer</button>
-			</form>
+			<ClientForm handleAdd ={this.handleAdd}/>
         </div>
       )
 
