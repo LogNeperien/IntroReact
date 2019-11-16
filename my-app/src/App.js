@@ -16,6 +16,13 @@ class App extends React.Component {
     clients.push({id : 4, nom : "Eloi"})
     this.setState({clients : clients})
   }
+  
+  handleClick2 = id => {
+    const clients = this.state.clients.slice();
+    const index = clients.findIndex((client) => client.id === id);
+	clients.splice(index,1);
+    this.setState({clients : clients})
+  }
 
   render() {
 
@@ -26,11 +33,11 @@ class App extends React.Component {
           {this.state.clients.map(
             client => (
             <li>
-             {client.nom} <button>X</button>
+             {client.nom} <button onClick={() => this.handleClick2(client.id)}>X</button>
             </li>))}
         </ul>
         <input type="text" placeholder="Ajouter un client"></input>
-        <button onClick={this.handleClick}>Confirmer</button>
+        <button onClick={() => this.handleClick()}>Confirmer</button>
         </div>
       )
 
