@@ -15,12 +15,6 @@ class App extends React.Component {
 	nouveauClient: ''
   }
 
-  handleClick =() => {
-    const clients = this.state.clients.slice();
-    clients.push({id : 4, nom : "Eloi"})
-    this.setState({clients : clients})
-  }
-  
   handleClick2 = id => {
     const clients = this.state.clients.slice();
     const index = clients.findIndex((client) => client.id === id);
@@ -29,8 +23,15 @@ class App extends React.Component {
   }
   
   handleSubmit = (event) => {
-	  event.preventDefault(); //pour pas que la page se recharge
-	  //console.log("coucou");
+	  event.preventDefault()
+	  
+	  const id = new Date().getTime();
+	  const nom = this.state.nouveauClient;
+	  
+	  const client = {id: id, nom: nom};
+	  const clients = this.state.clients.slice();
+      clients.push(client);
+      this.setState({clients : clients, nouveauClient : ''});
   }
   
   handleChange = (event) => {
@@ -53,7 +54,7 @@ class App extends React.Component {
 			</ul>
 			<form onSubmit= {this.handleSubmit}>
 				<input value={this.state.nouveauClient} onChange={this.handleChange} type="text" placeholder="Ajouter un client"></input>
-				<button /*onClick={() => this.handleClick()}*/>Confirmer</button>
+				<button>Confirmer</button>
 			</form>
         </div>
       )
