@@ -4,14 +4,15 @@ import './App.css';
 
 class App extends React.Component {
 	
-	clientInput = React.createRef();
+	
 	
   state = {
     clients : [
       {id : 1, nom : "Bob"},
       {id : 2, nom : "Martine"},
       {id : 3, nom : "Jeanne"}
-    ]
+    ],
+	nouveauClient: ''
   }
 
   handleClick =() => {
@@ -29,7 +30,13 @@ class App extends React.Component {
   
   handleSubmit = (event) => {
 	  event.preventDefault(); //pour pas que la page se recharge
-	  console.log(this.clientInput.current.value);
+	  //console.log("coucou");
+  }
+  
+  handleChange = (event) => {
+	  const value = event.currentTarget.value;
+	  console.log(event.currentTarget.value);
+	  this.setState({nouveauClient : value})
   }
 
   render() {
@@ -45,7 +52,7 @@ class App extends React.Component {
 				</li>))}
 			</ul>
 			<form onSubmit= {this.handleSubmit}>
-				<input ref={this.clientInput} type="text" placeholder="Ajouter un client"></input>
+				<input value={this.state.nouveauClient} onChange={this.handleChange} type="text" placeholder="Ajouter un client"></input>
 				<button /*onClick={() => this.handleClick()}*/>Confirmer</button>
 			</form>
         </div>
